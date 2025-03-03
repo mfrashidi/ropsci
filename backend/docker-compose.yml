@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+
+  web:
+    build: .
+    container_name: django
+    command: bash -c "python manage.py migrate && python manage.py collectstatic --no-input && gunicorn ropsci.asgi:application --bind 127.0.0.1:8000 --workers 2 -k uvicorn.workers.UvicornWorker"
+    volumes:
+      - .:/code
+      - ./staticfiles:/static
+    env_file:
+      - .env
+    network_mode: host
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./nginx/certs:/etc/nginx/certs
+      - ./staticfiles:/static
+    network_mode: host
+    depends_on:
+      - web

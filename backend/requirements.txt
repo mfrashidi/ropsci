@@ -1,0 +1,15 @@
+channels~=4.2.0
+channels-redis
+Django~=4.2.18
+pillow~=11.1.0
+numpy==1.26.4
+tensorflow==2.15.0
+python-decouple~=3.8
+psycopg2==2.9.9
+opencv-python==4.9.0.80
+daphne==4.1.2
+ultralytics==8.3.67
+huggingface-hub==0.27.1
+gunicorn==23.0.0
+uvicorn[standard]
+django-cors-headers==4.4.0
